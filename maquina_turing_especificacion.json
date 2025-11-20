@@ -1,0 +1,197 @@
+{
+  "descripcion": "Máquina de Turing para Cifrado César",
+  "tipo": "Máquina de Turing Determinística",
+  "estados": {
+    "Q": [
+      "q0",
+      "q_scan",
+      "q_process",
+      "q_shift",
+      "q_write",
+      "q_return",
+      "q_accept"
+    ],
+    "q0": "Estado inicial - procesa la llave",
+    "q_scan": "Escanea la cinta buscando caracteres a procesar",
+    "q_process": "Procesa el carácter actual",
+    "q_shift": "Aplica el desplazamiento César",
+    "q_write": "Escribe el resultado en la cinta",
+    "q_return": "Retorna al inicio para siguiente carácter",
+    "q_accept": "Estado de aceptación"
+  },
+  "alfabeto_entrada": {
+    "Sigma": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+      " "
+    ]
+  },
+  "alfabeto_cinta": {
+    "Gamma": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+      " ",
+      "_",
+      "#",
+      "*",
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
+  },
+  "estado_inicial": "q0",
+  "estados_aceptacion": [
+    "q_accept"
+  ],
+  "simbolo_blanco": "_",
+  "transiciones_ejemplo": {
+    "formato": "(estado_actual, simbolo_leido) -> (nuevo_estado, simbolo_escribir, direccion)",
+    "ejemplos": [
+      {
+        "de": [
+          "q0",
+          "3"
+        ],
+        "a": [
+          "q0",
+          "3",
+          "R"
+        ],
+        "descripcion": "Leer dígito de llave"
+      },
+      {
+        "de": [
+          "q0",
+          "#"
+        ],
+        "a": [
+          "q_scan",
+          "_",
+          "R"
+        ],
+        "descripcion": "Encontrar separador"
+      },
+      {
+        "de": [
+          "q_scan",
+          "A"
+        ],
+        "a": [
+          "q_process",
+          "A",
+          "R"
+        ],
+        "descripcion": "Carácter a procesar"
+      },
+      {
+        "de": [
+          "q_process",
+          "A"
+        ],
+        "a": [
+          "q_shift",
+          "D",
+          "L"
+        ],
+        "descripcion": "Aplicar shift (ejemplo: A+3=D)"
+      },
+      {
+        "de": [
+          "q_shift",
+          "D"
+        ],
+        "a": [
+          "q_return",
+          "*",
+          "L"
+        ],
+        "descripcion": "Marcar procesado"
+      },
+      {
+        "de": [
+          "q_return",
+          "_"
+        ],
+        "a": [
+          "q_scan",
+          "_",
+          "R"
+        ],
+        "descripcion": "Continuar scan"
+      },
+      {
+        "de": [
+          "q_scan",
+          "_"
+        ],
+        "a": [
+          "q_accept",
+          "_",
+          "R"
+        ],
+        "descripcion": "Finalizar"
+      }
+    ]
+  },
+  "funcionamiento": {
+    "encriptacion": "E(x) = (x + k) mod 27",
+    "decriptacion": "D(x) = (x - k) mod 27",
+    "alfabeto_size": 27,
+    "nota_espacios": "Los espacios NO se encriptan, se mantienen literalmente"
+  }
+}
