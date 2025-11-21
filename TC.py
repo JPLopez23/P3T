@@ -88,17 +88,15 @@ def caesar_encrypt(message: str, shift: int) -> str:
     ALFABETO: Solo 26 letras (A-Z)
     Los espacios NO se encriptan, se mantienen tal cual.
     """
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # 26 letras solamente
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  
     result = []
     
     for char in message:
         if char == ' ':
-            # Los espacios se mantienen sin cambios
             result.append(' ')
         elif char in alphabet:
-            # Solo procesamos letras A-Z
             pos = alphabet.index(char)
-            new_pos = (pos + shift) % 26  # Módulo 26, no 27
+            new_pos = (pos + shift) % 26 
             result.append(alphabet[new_pos])
         else:
             result.append(char)
@@ -112,17 +110,15 @@ def caesar_decrypt(message: str, shift: int) -> str:
     ALFABETO: Solo 26 letras (A-Z)
     Los espacios NO se decriptan, se mantienen tal cual.
     """
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # 26 letras solamente
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  
     result = []
     
     for char in message:
         if char == ' ':
-            # Los espacios se mantienen sin cambios
             result.append(' ')
         elif char in alphabet:
-            # Solo procesamos letras A-Z
             pos = alphabet.index(char)
-            new_pos = (pos - shift) % 26  # Módulo 26, no 27
+            new_pos = (pos - shift) % 26  
             result.append(alphabet[new_pos])
         else:
             result.append(char)
@@ -220,7 +216,7 @@ def show_test_cases(filename: str):
     """Muestra los casos de prueba disponibles"""
     cases = load_test_cases(filename)
     if cases:
-        print(f"\n📋 Casos disponibles en '{filename}':")
+        print(f"\n Casos disponibles en '{filename}':")
         print("-" * 60)
         for i, case in enumerate(cases, 1):
             print(f"[{i}] {case}")
@@ -254,7 +250,7 @@ def process_encryption():
             print(f"Input completo:    {input_str}")
             print(f"Llave:             {key_part} (shift = {shift})")
             print(f"Mensaje original:  {message_part}")
-            print("\n⚙️ Ejecutando Máquina de Turing...")
+            print("\n Ejecutando Máquina de Turing...")
             
             encrypted = caesar_encrypt(message_part, shift)
             
@@ -263,11 +259,11 @@ def process_encryption():
             result_content = f"Input: {input_str}\nLlave: {shift}\nOriginal: {message_part}\nEncriptado: {encrypted}\n"
             save_result('resultado_encriptacion.txt', result_content)
         else:
-            print("❌ Opción inválida")
+            print(" Opción inválida")
     except ValueError:
-        print("❌ Entrada inválida")
+        print(" Entrada inválida")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
 
 
 def process_decryption():
@@ -297,7 +293,7 @@ def process_decryption():
             print(f"Input completo:     {input_str}")
             print(f"Llave:              {key_part} (shift = {shift})")
             print(f"Mensaje encriptado: {message_part}")
-            print("\n⚙️ Ejecutando Máquina de Turing...")
+            print("\n Ejecutando Máquina de Turing...")
             
             decrypted = caesar_decrypt(message_part, shift)
             
@@ -306,11 +302,11 @@ def process_decryption():
             result_content = f"Input: {input_str}\nLlave: {shift}\nEncriptado: {message_part}\nDecriptado: {decrypted}\n"
             save_result('resultado_decriptacion.txt', result_content)
         else:
-            print("❌ Opción inválida")
+            print(" Opción inválida")
     except ValueError:
-        print("❌ Entrada inválida")
+        print(" Entrada inválida")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
 
 
 def process_manual_input():
@@ -325,7 +321,7 @@ def process_manual_input():
     try:
         op = int(input())
         if op not in [1, 2]:
-            print("❌ Opción inválida")
+            print(" Opción inválida")
             return
         
         print("\nIngrese la entrada en formato: LLAVE#MENSAJE")
@@ -334,7 +330,7 @@ def process_manual_input():
         input_str = input().strip()
         
         if '#' not in input_str:
-            print("❌ Formato incorrecto. Debe incluir '#' como separador")
+            print(" Formato incorrecto. Debe incluir '#' como separador")
             return
         
         key_part, message_part = input_str.split('#', 1)
@@ -347,7 +343,7 @@ def process_manual_input():
         print("-" * 60)
         print(f"Llave: {key_part} (shift = {shift})")
         print(f"Mensaje: {message_part}")
-        print("\n⚙️ Ejecutando Máquina de Turing...")
+        print("\n Ejecutando Máquina de Turing...")
         
         if op == 1:
             result = caesar_encrypt(message_part, shift)
@@ -359,9 +355,9 @@ def process_manual_input():
             save_result('resultado_manual.txt', f"Operación: Decriptación\nInput: {key_part}#{message_part}\nResultado: {result}\n")
             
     except ValueError:
-        print("❌ Entrada inválida")
+        print(" Entrada inválida")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
 
 
 def view_all_cases():
@@ -370,10 +366,10 @@ def view_all_cases():
     print("CASOS DE PRUEBA DISPONIBLES")
     print("=" * 60)
     
-    print("\n📝 CASOS DE ENCRIPTACIÓN:")
+    print("\n CASOS DE ENCRIPTACIÓN:")
     show_test_cases('casos_encriptar.txt')
     
-    print("\n🔓 CASOS DE DECRIPTACIÓN:")
+    print("\n CASOS DE DECRIPTACIÓN:")
     show_test_cases('casos_decriptar.txt')
     
     input("\nPresione Enter para continuar...")
@@ -458,13 +454,13 @@ def main():
                 print("=" * 60)
                 break
             else:
-                print("❌ Opción inválida. Intente de nuevo.")
+                print(" Opción inválida. Intente de nuevo.")
                 
         except KeyboardInterrupt:
-            print("\n\n⚠️  Programa interrumpido por el usuario")
+            print("\n\n  Programa interrumpido por el usuario")
             break
         except Exception as e:
-            print(f"❌ Error inesperado: {e}")
+            print(f" Error inesperado: {e}")
 
 
 if __name__ == "__main__":
