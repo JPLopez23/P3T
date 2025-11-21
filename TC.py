@@ -75,7 +75,7 @@ class TuringMachine:
 
 
 def parse_key(key_str: str) -> int:
-    """Convierte la llave a número (1-27)"""
+    """Convierte la llave a número (1-26 para letras, o número directo)"""
     if key_str.isdigit():
         return int(key_str)
     else:
@@ -84,19 +84,21 @@ def parse_key(key_str: str) -> int:
 
 def caesar_encrypt(message: str, shift: int) -> str:
     """
-    Encripción César usando solo operaciones básicas de MT simuladas.
-    Esta función simula el comportamiento de la MT.
+    Encriptación César usando solo operaciones básicas de MT simuladas.
+    ALFABETO: Solo 26 letras (A-Z)
     Los espacios NO se encriptan, se mantienen tal cual.
     """
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ '
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # 26 letras solamente
     result = []
     
     for char in message:
         if char == ' ':
+            # Los espacios se mantienen sin cambios
             result.append(' ')
         elif char in alphabet:
+            # Solo procesamos letras A-Z
             pos = alphabet.index(char)
-            new_pos = (pos + shift) % 27
+            new_pos = (pos + shift) % 26  # Módulo 26, no 27
             result.append(alphabet[new_pos])
         else:
             result.append(char)
@@ -106,18 +108,21 @@ def caesar_encrypt(message: str, shift: int) -> str:
 
 def caesar_decrypt(message: str, shift: int) -> str:
     """
-    Decripción César usando solo operaciones básicas de MT simuladas.
+    Decriptación César usando solo operaciones básicas de MT simuladas.
+    ALFABETO: Solo 26 letras (A-Z)
     Los espacios NO se decriptan, se mantienen tal cual.
     """
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ '
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # 26 letras solamente
     result = []
     
     for char in message:
         if char == ' ':
+            # Los espacios se mantienen sin cambios
             result.append(' ')
         elif char in alphabet:
+            # Solo procesamos letras A-Z
             pos = alphabet.index(char)
-            new_pos = (pos - shift) % 27
+            new_pos = (pos - shift) % 26  # Módulo 26, no 27
             result.append(alphabet[new_pos])
         else:
             result.append(char)
@@ -215,7 +220,7 @@ def show_test_cases(filename: str):
     """Muestra los casos de prueba disponibles"""
     cases = load_test_cases(filename)
     if cases:
-        print(f"\n Casos disponibles en '{filename}':")
+        print(f"\n📋 Casos disponibles en '{filename}':")
         print("-" * 60)
         for i, case in enumerate(cases, 1):
             print(f"[{i}] {case}")
@@ -249,7 +254,7 @@ def process_encryption():
             print(f"Input completo:    {input_str}")
             print(f"Llave:             {key_part} (shift = {shift})")
             print(f"Mensaje original:  {message_part}")
-            print("\n Ejecutando Máquina de Turing...")
+            print("\n⚙️ Ejecutando Máquina de Turing...")
             
             encrypted = caesar_encrypt(message_part, shift)
             
@@ -258,11 +263,11 @@ def process_encryption():
             result_content = f"Input: {input_str}\nLlave: {shift}\nOriginal: {message_part}\nEncriptado: {encrypted}\n"
             save_result('resultado_encriptacion.txt', result_content)
         else:
-            print(" Opción inválida")
+            print("❌ Opción inválida")
     except ValueError:
-        print(" Entrada inválida")
+        print("❌ Entrada inválida")
     except Exception as e:
-        print(f" Error: {e}")
+        print(f"❌ Error: {e}")
 
 
 def process_decryption():
@@ -292,7 +297,7 @@ def process_decryption():
             print(f"Input completo:     {input_str}")
             print(f"Llave:              {key_part} (shift = {shift})")
             print(f"Mensaje encriptado: {message_part}")
-            print("\n Ejecutando Máquina de Turing...")
+            print("\n⚙️ Ejecutando Máquina de Turing...")
             
             decrypted = caesar_decrypt(message_part, shift)
             
@@ -301,11 +306,11 @@ def process_decryption():
             result_content = f"Input: {input_str}\nLlave: {shift}\nEncriptado: {message_part}\nDecriptado: {decrypted}\n"
             save_result('resultado_decriptacion.txt', result_content)
         else:
-            print(" Opción inválida")
+            print("❌ Opción inválida")
     except ValueError:
-        print(" Entrada inválida")
+        print("❌ Entrada inválida")
     except Exception as e:
-        print(f" Error: {e}")
+        print(f"❌ Error: {e}")
 
 
 def process_manual_input():
@@ -320,7 +325,7 @@ def process_manual_input():
     try:
         op = int(input())
         if op not in [1, 2]:
-            print(" Opción inválida")
+            print("❌ Opción inválida")
             return
         
         print("\nIngrese la entrada en formato: LLAVE#MENSAJE")
@@ -329,7 +334,7 @@ def process_manual_input():
         input_str = input().strip()
         
         if '#' not in input_str:
-            print(" Formato incorrecto. Debe incluir '#' como separador")
+            print("❌ Formato incorrecto. Debe incluir '#' como separador")
             return
         
         key_part, message_part = input_str.split('#', 1)
@@ -342,7 +347,7 @@ def process_manual_input():
         print("-" * 60)
         print(f"Llave: {key_part} (shift = {shift})")
         print(f"Mensaje: {message_part}")
-        print("\n Ejecutando Máquina de Turing...")
+        print("\n⚙️ Ejecutando Máquina de Turing...")
         
         if op == 1:
             result = caesar_encrypt(message_part, shift)
@@ -354,9 +359,9 @@ def process_manual_input():
             save_result('resultado_manual.txt', f"Operación: Decriptación\nInput: {key_part}#{message_part}\nResultado: {result}\n")
             
     except ValueError:
-        print(" Entrada inválida")
+        print("❌ Entrada inválida")
     except Exception as e:
-        print(f" Error: {e}")
+        print(f"❌ Error: {e}")
 
 
 def view_all_cases():
@@ -365,10 +370,10 @@ def view_all_cases():
     print("CASOS DE PRUEBA DISPONIBLES")
     print("=" * 60)
     
-    print("\n CASOS DE ENCRIPTACIÓN:")
+    print("\n📝 CASOS DE ENCRIPTACIÓN:")
     show_test_cases('casos_encriptar.txt')
     
-    print("\n CASOS DE DECRIPTACIÓN:")
+    print("\n🔓 CASOS DE DECRIPTACIÓN:")
     show_test_cases('casos_decriptar.txt')
     
     input("\nPresione Enter para continuar...")
@@ -390,7 +395,8 @@ def save_machine_specification():
             "q_accept": "Estado de aceptación"
         },
         "alfabeto_entrada": {
-            "Sigma": list("ABCDEFGHIJKLMNOPQRSTUVWXYZ ")
+            "Sigma": list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+            "nota": "26 letras - Los espacios se tratan como caracteres especiales"
         },
         "alfabeto_cinta": {
             "Gamma": list("ABCDEFGHIJKLMNOPQRSTUVWXYZ _#*0123456789")
@@ -404,6 +410,7 @@ def save_machine_specification():
                 {"de": ["q0", "3"], "a": ["q0", "3", "R"], "descripcion": "Leer dígito de llave"},
                 {"de": ["q0", "#"], "a": ["q_scan", "_", "R"], "descripcion": "Encontrar separador"},
                 {"de": ["q_scan", "A"], "a": ["q_process", "A", "R"], "descripcion": "Carácter a procesar"},
+                {"de": ["q_scan", " "], "a": ["q_scan", " ", "R"], "descripcion": "Espacios se mantienen sin cambio"},
                 {"de": ["q_process", "A"], "a": ["q_shift", "D", "L"], "descripcion": "Aplicar shift (ejemplo: A+3=D)"},
                 {"de": ["q_shift", "D"], "a": ["q_return", "*", "L"], "descripcion": "Marcar procesado"},
                 {"de": ["q_return", "_"], "a": ["q_scan", "_", "R"], "descripcion": "Continuar scan"},
@@ -411,10 +418,10 @@ def save_machine_specification():
             ]
         },
         "funcionamiento": {
-            "encriptacion": "E(x) = (x + k) mod 27",
-            "decriptacion": "D(x) = (x - k) mod 27",
-            "alfabeto_size": 27,
-            "nota_espacios": "Los espacios NO se encriptan, se mantienen literalmente"
+            "encriptacion": "E(x) = (x + k) mod 26",
+            "decriptacion": "D(x) = (x - k) mod 26",
+            "alfabeto_size": 26,
+            "nota_espacios": "Los espacios NO se encriptan ni se cuentan en el alfabeto, se mantienen literalmente"
         }
     }
     
@@ -451,13 +458,13 @@ def main():
                 print("=" * 60)
                 break
             else:
-                print(" Opción inválida. Intente de nuevo.")
+                print("❌ Opción inválida. Intente de nuevo.")
                 
         except KeyboardInterrupt:
-            print("\n\n  Programa interrumpido por el usuario")
+            print("\n\n⚠️  Programa interrumpido por el usuario")
             break
         except Exception as e:
-            print(f" Error inesperado: {e}")
+            print(f"❌ Error inesperado: {e}")
 
 
 if __name__ == "__main__":

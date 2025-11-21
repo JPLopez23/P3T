@@ -46,9 +46,9 @@
       "W",
       "X",
       "Y",
-      "Z",
-      " "
-    ]
+      "Z"
+    ],
+    "nota": "26 letras - Los espacios se tratan como caracteres especiales"
   },
   "alfabeto_cinta": {
     "Gamma": [
@@ -140,6 +140,18 @@
       },
       {
         "de": [
+          "q_scan",
+          " "
+        ],
+        "a": [
+          "q_scan",
+          " ",
+          "R"
+        ],
+        "descripcion": "Espacios se mantienen sin cambio"
+      },
+      {
+        "de": [
           "q_process",
           "A"
         ],
@@ -189,9 +201,9 @@
     ]
   },
   "funcionamiento": {
-    "encriptacion": "E(x) = (x + k) mod 27",
-    "decriptacion": "D(x) = (x - k) mod 27",
-    "alfabeto_size": 27,
-    "nota_espacios": "Los espacios NO se encriptan, se mantienen literalmente"
+    "encriptacion": "E(x) = (x + k) mod 26",
+    "decriptacion": "D(x) = (x - k) mod 26",
+    "alfabeto_size": 26,
+    "nota_espacios": "Los espacios NO se encriptan ni se cuentan en el alfabeto, se mantienen literalmente"
   }
 }
